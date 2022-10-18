@@ -27,12 +27,13 @@ public class QRCodeController {
     public String showQRCode(String latitude, String longitude, Model model) {
         model.addAttribute("qrCodeContent", "/generateQRCode?latitude=" + latitude +','+ longitude);
         return "show-qr-code";
+//        return "index";
     }
 
     @GetMapping("/generateQRCode")
     public void generateQRCode(String latitude, String longitude, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
-        byte[] qrCode = qrCodeService.generateQRCode(latitude,longitude, 500, 500);
+        byte[] qrCode = qrCodeService.generateQRCode(latitude, longitude, 500, 500);
         OutputStream outputStream = response.getOutputStream();
         outputStream.write(qrCode);
     }
